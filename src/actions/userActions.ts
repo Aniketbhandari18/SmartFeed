@@ -1,9 +1,16 @@
+import { clerkClient } from "@/lib/clerkClient";
 import prisma from "@/lib/prisma"
 import { clerkUserPayload } from "@/types/clerk";
 
 export const createUser = async (user: clerkUserPayload) => {
   const newUser = await prisma.user.create({ data: user });
   console.log("New user created:", newUser);
+
+  await clerkClient.users.updateUserMetadata(user.clerkId, {
+    publicMetadata: {
+      dbUserId: newUser.id
+    }
+  })
 
   return newUser;
 }
