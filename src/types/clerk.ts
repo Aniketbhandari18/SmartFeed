@@ -5,3 +5,12 @@ export type clerkUserPayload = {
   lastName: string;
   avatar: string;
 }
+
+export type CustomPublicMetadata = {
+  dbUserId?: string;
+}
+
+export type CustomSessionClaims = {
+  publicMetadata?: CustomPublicMetadata;
+  [key: string]: any;
+}
