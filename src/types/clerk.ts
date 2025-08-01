@@ -1,4 +1,4 @@
-type clerkUserPayload = {
+export type clerkUserPayload = {
   clerkId: string;
   email: string;
   firstName: string;

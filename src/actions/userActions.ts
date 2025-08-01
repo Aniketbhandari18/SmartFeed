@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma"
+import { clerkUserPayload } from "@/types/clerk";
 
 export const createUser = async (user: clerkUserPayload) => {
   const newUser = await prisma.user.create({ data: user });
