@@ -22,4 +22,22 @@ model User {
   avatar    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  createdSpaces Space[]
+}
+
+model Space {
+  id           String   @id @default(cuid())
+  createdById  String   // owner of this space
+  name         String   
+  slug         String   @unique // unique slug for feedback submission url
+  title        String   // title or header for your product/service
+  description  String   // short para explaining your product/service and what kind of feedback you want 
+  externalLink String?  // Link to their product/service page
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  createdBy User @relation(fields: [createdById], references: [id])
+
+  @@unique([name, createdById])
 }
