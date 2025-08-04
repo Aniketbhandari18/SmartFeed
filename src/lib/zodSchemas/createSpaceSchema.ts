@@ -15,8 +15,9 @@ export const createSpaceSchema = z.object({
     .string()
     .min(10, "Description must be at least 10 characters.")
     .max(500, "Description must be at most 500 characters."),
-    
-  externalLink: z
-    .url("Invalid URL format")
-    .optional(),
+
+  externalLink: z.union([
+    z.literal(""),
+    z.url("Invalid URL format"),
+  ]),
 });
