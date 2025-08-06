@@ -5,6 +5,7 @@ import prisma from "@/lib/prisma";
 import Link from "next/link";
 import { BarChart3, Trash2, Link as LinkIcon, Pencil } from "lucide-react";
 import CreateSpaceForm from "./CreateSpaceForm";
+import CopyButton from "./CopyButton";
 
 export default async function SpaceList() {
   const dbUserId = await getDbUserId();
@@ -58,12 +59,14 @@ export default async function SpaceList() {
                       </div>
                       <div className="flex items-center space-x-1 ml-4 shrink-0">
                         {/* Copy feedback submission page link button */}
-                        <button
-                          title="Copy Submission Link"
-                          className="p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors cursor-pointer"
-                        >
-                          <LinkIcon size={18} />
-                        </button>
+                        <CopyButton value={`${process.env.NEXT_PUBLIC_APP_URL}/submit/${space.slug}`}>
+                          <button
+                            title="Copy Submission Link"
+                            className="p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors cursor-pointer"
+                          >
+                            <LinkIcon size={18} />
+                          </button>
+                        </CopyButton>
                         {/* Edit button */}
                         <button
                           title="Edit Space"
