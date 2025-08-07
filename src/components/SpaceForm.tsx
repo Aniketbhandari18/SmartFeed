@@ -20,17 +20,10 @@ import { DialogClose, DialogFooter } from "./ui/dialog";
 import { Loader2 } from "lucide-react";
 import { useTransition } from "react";
 import toast from "react-hot-toast";
-
-type spaceData = {
-  id?: string;
-  name: string;
-  title: string;
-  description: string;
-  externalLink?: string;
-};
+import { Space } from "@prisma/client";
 
 type props = {
-  defaultValues?: spaceData;
+  defaultValues?: Space;
   onSubmit: (
     values: z.infer<typeof createSpaceSchema>
   ) => Promise<{ success: boolean; message: string }>;
