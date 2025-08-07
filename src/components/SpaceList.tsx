@@ -6,6 +6,7 @@ import Link from "next/link";
 import { BarChart3, Trash2, Link as LinkIcon, Pencil } from "lucide-react";
 import CreateSpaceForm from "./CreateSpaceForm";
 import CopyButton from "./CopyButton";
+import UpdateSpaceForm from "./UpdateSpaceForm";
 
 export default async function SpaceList() {
   const dbUserId = await getDbUserId();
@@ -68,12 +69,14 @@ export default async function SpaceList() {
                           </button>
                         </CopyButton>
                         {/* Edit button */}
-                        <button
-                          title="Edit Space"
-                          className="p-2 text-green-600 hover:bg-green-100 rounded-lg transition-colors cursor-pointer"
-                        >
-                          <Pencil size={18} />
-                        </button>
+                        <UpdateSpaceForm space={space}>
+                          <button
+                            title="Edit Space"
+                            className="p-2 text-green-600 hover:bg-green-100 rounded-lg transition-colors cursor-pointer"
+                          >
+                            <Pencil size={18} />
+                          </button>
+                        </UpdateSpaceForm>
 
                         {/* Delete button */}
                         <button
