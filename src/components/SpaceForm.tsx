@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import { useForm } from "react-hook-form";
-import { createSpaceSchema } from "@/lib/zodSchemas/createSpaceSchema";
+import { spaceFormSchema } from "@/lib/zodSchemas/spaceFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
@@ -25,7 +25,7 @@ import { Space } from "@prisma/client";
 type props = {
   defaultValues?: Space;
   onSubmit: (
-    values: z.infer<typeof createSpaceSchema>
+    values: z.infer<typeof spaceFormSchema>
   ) => Promise<{ success: boolean; message: string }>;
   onSuccess?: () => void;
 };
@@ -37,8 +37,8 @@ export default function SpaceForm({
 }: props) {
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof createSpaceSchema>>({
-    resolver: zodResolver(createSpaceSchema),
+  const form = useForm<z.infer<typeof spaceFormSchema>>({
+    resolver: zodResolver(spaceFormSchema),
     defaultValues: {
       name: defaultValues?.name || "",
       title: defaultValues?.title || "",
@@ -47,7 +47,7 @@ export default function SpaceForm({
     },
   });
 
-  const handleSubmit = (values: z.infer<typeof createSpaceSchema>) => {
+  const handleSubmit = (values: z.infer<typeof spaceFormSchema>) => {
     startTransition(async () => {
       const res = await fetch(
         `/api/spaces/availability?name=${encodeURIComponent(values.name)}`,

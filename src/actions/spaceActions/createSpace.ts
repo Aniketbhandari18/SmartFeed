@@ -4,12 +4,12 @@ import { z } from "zod";
 import { getDbUserId } from "@/lib/getDbUserId";
 import { generateUniqueSlug } from "@/utils/generateUniqueSlug";
 import prisma from "@/lib/prisma";
-import { createSpaceSchema } from "@/lib/zodSchemas/createSpaceSchema";
+import { spaceFormSchema } from "@/lib/zodSchemas/spaceFormSchema";
 import { revalidatePath } from "next/cache";
 
-export const createSpace = async (values: z.infer<typeof createSpaceSchema>) => {
+export const createSpace = async (values: z.infer<typeof spaceFormSchema>) => {
   try {
-    const result = createSpaceSchema.safeParse(values);
+    const result = spaceFormSchema.safeParse(values);
 
     if (!result.success) {
       throw new Error(result.error.issues[0].message);
