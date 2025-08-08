@@ -7,6 +7,7 @@ import { BarChart3, Trash2, Link as LinkIcon, Pencil } from "lucide-react";
 import CreateSpaceForm from "./CreateSpaceForm";
 import CopyButton from "./CopyButton";
 import UpdateSpaceForm from "./UpdateSpaceForm";
+import DeleteSpaceDialog from "./DeleteSpaceDialog";
 
 export default async function SpaceList() {
   const dbUserId = await getDbUserId();
@@ -79,12 +80,14 @@ export default async function SpaceList() {
                         </UpdateSpaceForm>
 
                         {/* Delete button */}
-                        <button
-                          className="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors cursor-pointer"
-                          title="Delete Space"
-                        >
-                          <Trash2 size={18} />
-                        </button>
+                        <DeleteSpaceDialog id={space.id} slug={space.slug}>
+                          <button
+                            className="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors cursor-pointer"
+                            title="Delete Space"
+                          >
+                            <Trash2 size={18} />
+                          </button>
+                        </DeleteSpaceDialog>
                       </div>
                     </div>
                   </motion.div>
