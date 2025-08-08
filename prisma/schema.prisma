@@ -47,6 +47,7 @@ model Feedback {
   id        String    @id @default(cuid())
   spaceId   String
   content   String
+  userName  String
   userEmail String
   category  Category
   sentiment Sentiment
