@@ -3,6 +3,7 @@
 
 import { createUser, deleteUser, updateuser } from "@/actions/userActions";
 import { ApiError } from "@/lib/apiError";
+import { clerkUserPayload } from "@/types/clerk";
 import { WebhookEvent } from "@clerk/nextjs/webhooks";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
