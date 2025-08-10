@@ -37,7 +37,36 @@ model Space {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
+  feedbacks Feedback[]
+
   createdBy User @relation(fields: [createdById], references: [id])
 
   @@unique([name, createdById])
+}
+
+model Feedback {
+  id        String    @id @default(uuid())
+  spaceId   String
+  content   String
+  userName  String
+  userEmail String
+  category  Category
+  sentiment Sentiment
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  space Space @relation(fields: [spaceId], references: [id])
+}
+
+enum Category {
+  praise
+  complaint
+  feature_request
+  bug_report
+}
+
+enum Sentiment {
+  positive
+  negative
+  neutral
 }
