@@ -12,5 +12,5 @@ export type CustomPublicMetadata = {
 
 export type CustomSessionClaims = {
   publicMetadata?: CustomPublicMetadata;
-  [key: string]: any;
+  [key: string]: unknown;
 }
