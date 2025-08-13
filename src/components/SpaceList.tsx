@@ -15,6 +15,11 @@ export default async function SpaceList() {
   const spaces = await prisma.space.findMany({
     where: { createdById: dbUserId },
     orderBy: { createdAt: "desc" },
+    include: {
+      _count: {
+        select: { feedbacks: true },
+      }
+    }
   });
 
   return (
@@ -56,7 +61,13 @@ export default async function SpaceList() {
                           {space.description}
                         </p>
                         <div className="flex items-center space-x-4 text-sm text-gray-500">
-                          <span>{spaces.length || 0} feedbacks</span>
+                          <span>
+                            {space._count.feedbacks}{" "}
+                            {space._count.feedbacks > 1
+                              ? "feedbacks"
+                              : "feedback"
+                            }
+                          </span>
                         </div>
                       </div>
                       <div className="flex items-center space-x-1 ml-4 shrink-0">
