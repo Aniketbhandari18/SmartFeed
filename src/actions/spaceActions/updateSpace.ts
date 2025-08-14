@@ -38,9 +38,10 @@ export const updateSpace = async (
     if (values.name !== existingSpace.name) {
       slug = await generateUniqueSlug(values.name);
     }
-
+    
+    let updatedSpace;
     try {
-      await prisma.space.update({
+      updatedSpace = await prisma.space.update({
         where: { id },
         data: {
           name: values.name,
@@ -59,6 +60,7 @@ export const updateSpace = async (
     return {
       success: true,
       message: "Space updated successfully",
+      updatedSpace 
     };
   } catch (error) {
     return {
