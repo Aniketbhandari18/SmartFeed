@@ -27,7 +27,11 @@ type props = {
   onSubmit: (
     values: z.infer<typeof spaceFormSchema>
   ) => Promise<{ success: boolean; message: string }>;
-  onSuccess?: () => void;
+  onSuccess?: (result: {
+    success: boolean;
+    message: string;
+    updatedSpace?: Space;
+  }) => void;
 };
 
 export default function SpaceForm({
@@ -70,7 +74,7 @@ export default function SpaceForm({
       const result = await onSubmit(values);
 
       if (result.success) {
-        onSuccess?.();
+        onSuccess?.(result);
         toast.success(result.message);
         form.reset();
       } else {
