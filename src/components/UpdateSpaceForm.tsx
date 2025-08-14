@@ -1,6 +1,5 @@
 "use client";
 
-import { createSpace } from "@/actions/spaceActions/createSpace";
 import {
   Dialog,
   DialogContent,
@@ -13,14 +12,32 @@ import { ReactNode, useState } from "react";
 import SpaceForm from "./SpaceForm";
 import { Space } from "@prisma/client";
 import { updateSpace } from "@/actions/spaceActions/updateSpace";
+import { useRouter } from "next/navigation";
 
 type props = {
   children: ReactNode;
   space: Space;
+  redirectOnSlugChange?: boolean;
 };
 
-export default function UpdateSpaceForm({ children, space }: props) {
+export default function UpdateSpaceForm({
+  children,
+  space,
+  redirectOnSlugChange = false,
+}: props) {
   const [open, setOpen] = useState<boolean>(false);
+  const router = useRouter();
+
+  const onSuccess = (result: {
+    success: boolean;
+    message: string;
+    updatedSpace?: Space;
+  }) => {
+    setOpen(false);
+    if (redirectOnSlugChange && result.updatedSpace?.slug !== space.slug) {
+      router.replace(`/spaces/${result.updatedSpace?.slug}`);
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={() => setOpen(!open)}>
@@ -33,7 +50,7 @@ export default function UpdateSpaceForm({ children, space }: props) {
         <SpaceForm
           defaultValues={space}
           onSubmit={(values) => updateSpace(space.id, values)}
-          onSuccess={() => setOpen(false)}
+          onSuccess={onSuccess}
         />
       </DialogContent>
     </Dialog>
