@@ -17,6 +17,7 @@ import {
 import { deleteSpace } from "@/actions/spaceActions/deleteSpace";
 import toast from "react-hot-toast";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 type props = {
   id: string;
@@ -28,6 +29,7 @@ export default function DeleteSpaceDialog({ id, slug, children }: props) {
   const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [typedSlug, setTypedSlug] = useState("");
+  const router = useRouter();
 
   const handleDelete = () => {
     startTransition(async () => {
@@ -36,6 +38,7 @@ export default function DeleteSpaceDialog({ id, slug, children }: props) {
       if (result.success) {
         toast.success("Space deleted successfully");
         setOpen(false);
+        router.replace("/dashboard");
       } else {
         toast.error(result.message);
       }
