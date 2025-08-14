@@ -49,20 +49,22 @@ export default function SpaceForm({
 
   const handleSubmit = (values: z.infer<typeof spaceFormSchema>) => {
     startTransition(async () => {
-      const res = await fetch(
-        `/api/spaces/availability?name=${encodeURIComponent(values.name)}`,
-        {
-          method: "GET",
+      if (values.name !== defaultValues?.name) {
+        const res = await fetch(
+          `/api/spaces/availability?name=${encodeURIComponent(values.name)}`,
+          {
+            method: "GET",
+          }
+        );
+
+        const { available } = await res.json();
+
+        if (!available) {
+          form.setError("name", {
+            message: "This space name already exists on this account",
+          });
+          return;
         }
-      );
-
-      const { available } = await res.json();
-
-      if (!available) {
-        form.setError("name", {
-          message: "This space name already exists on this account",
-        });
-        return;
       }
 
       const result = await onSubmit(values);
