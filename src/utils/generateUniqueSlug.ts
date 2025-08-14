@@ -19,7 +19,7 @@ export async function generateUniqueSlug(name: string) {
 
   const slugSet = new Set(existingSlugs.map((s) => s.slug));
   let count = 1;
-  let newSlug = `${baseSlug}-${count}`;
+  let newSlug = baseSlug;
 
   while (slugSet.has(newSlug)) {
     count++;
