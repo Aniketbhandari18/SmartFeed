@@ -39,7 +39,7 @@ export default async function SpaceHeader({ space }: { space: Space }) {
     <div>
       {/* space header */}
       <Card className="rounded-lg p-4 mb-6">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 p-6 bg-gradient-card  rounded-lg border border-border shadow-card bg-gray-50">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 lg:gap-6 p-3 lg:p-6 bg-gradient-card  rounded-lg border border-border shadow-card bg-gray-50">
           <div className="space-y-2">
             <h1 className="text-3xl font-bold text-foreground">{space.name}</h1>
             <div className="flex items-center gap-2 text-muted-foreground">
