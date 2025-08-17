@@ -9,7 +9,7 @@ export const classifyFeedback = async (feedback: string) => {
       Given the feedback: "${feedback}", classify it and respond in JSON with two fields:
   
       1. "sentiment": should be "positive", "neutral", or "negative"
-      2. "category": choose one of ["praise", "complaint", "bug_report", "feature_request", "other"]
+      2. "category": choose one of ["praise", "complaint", "bug_report", "feature_request", "question", "spam", "other"]
   
       Respond ONLY in this JSON format:
       {

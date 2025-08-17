@@ -63,6 +63,9 @@ enum Category {
   complaint
   feature_request
   bug_report
+  question
+  spam
+  other
 }
 
 enum Sentiment {
