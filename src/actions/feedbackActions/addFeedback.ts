@@ -62,7 +62,7 @@ export const addFeedback = async (
           },
         ],
       });
-    } catch (error: any) {
+    } catch (error) {
       console.log("Error:", error);
       throw new Error("Error adding feedback");
     }
