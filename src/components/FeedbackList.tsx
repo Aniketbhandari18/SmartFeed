@@ -22,7 +22,7 @@ type props = {
 };
 
 export default function FeedbackList({ spaceId }: props) {
-  const LIMIT = 4;
+  const LIMIT = 20;
 
   const [sentiment, setSentiment] = useState<Sentiment | "all">("all");
   const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
@@ -56,6 +56,12 @@ export default function FeedbackList({ spaceId }: props) {
       }
     })();
   }, [sentiment, page]);
+
+  useEffect(() => {
+    setFeedbacks([]);
+    setHasMore(true);
+    setPage(1);
+  }, [sentiment]);
 
   return (
     <div>
