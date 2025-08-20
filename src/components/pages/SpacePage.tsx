@@ -2,7 +2,7 @@ import { getDbUserId } from "@/lib/getDbUserId";
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import SpaceHeader from "../SpaceHeader";
-import FeedbackList from "../FeedbackList";
+import SpaceContent from "../SpaceContent";
 
 export default async function SpacePage({ slug }: { slug: string }) {
   const dbUserId = await getDbUserId();
@@ -22,7 +22,9 @@ export default async function SpacePage({ slug }: { slug: string }) {
       <div className="mb-4">
         <SpaceHeader space={space} />
       </div>
-      <FeedbackList spaceId={space.id} />
+
+      {/* main content */}
+      <SpaceContent spaceId={space.id} />
     </div>
   );
 }
