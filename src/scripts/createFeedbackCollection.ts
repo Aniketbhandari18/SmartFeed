@@ -12,6 +12,13 @@ dotenv.config({ path: "../../.env.local" });
       },
     });
     console.log("Created collection feedbacks", res);
+
+    await qdrant.createPayloadIndex("feedbacks", {
+      field_name: "spaceId",
+      field_schema: "keyword",
+    });
+
+    console.log("Created payload index:");
   } catch (e) {
     console.error(e);
   }
