@@ -52,7 +52,7 @@ export default function ChatAssistant({ spaceId }: { spaceId: string }) {
             <ConversationContent className="pt-0">
               <Message from="assistant" className="flex items-start gap-3">
                 <MessageContent className="bg-gray-200!">
-                  Hi! I'm your SmartFeed AI assistant. I can help you analyze
+                  Hi! I&apos;m your SmartFeed AI assistant. I can help you analyze
                   feedback patterns, suggest improvements, and answer questions
                   about your feedback data.
                 </MessageContent>
