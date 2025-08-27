@@ -1,3 +1,4 @@
+import ChatAssistant from "./ChatAssistant";
 import FeedbackList from "./FeedbackList";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 
@@ -13,6 +14,10 @@ export default function SpaceContent({ spaceId }: { spaceId: string }) {
 
       <TabsContent value="feedback">
         <FeedbackList spaceId={spaceId} />
+      </TabsContent>
+
+      <TabsContent value="chatbot">
+        <ChatAssistant spaceId={spaceId} />
       </TabsContent>
     </Tabs>
   );
