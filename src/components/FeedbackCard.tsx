@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -7,7 +10,12 @@ import {
   ThumbsDown,
   Mail,
   MoreHorizontal,
+  FilePlus,
+  Search,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { getNameInitials } from "@/utils/getNameInitials";
 import { ExpandableText } from "./ExpandableText";
 import { format, formatDistanceToNow } from "date-fns";
@@ -31,6 +39,8 @@ export const FeedbackCard = ({
   userName,
   userEmail,
 }: FeedbackCardProps) => {
+  const [showSimilar, setShowSimilar] = useState(false);
+
   const getSentimentConfig = (sentiment: string) => {
     switch (sentiment) {
       case "positive":
@@ -86,7 +96,7 @@ export const FeedbackCard = ({
               </div>
             </div>
           </div>
-          <div>
+          <div className="flex flex-col items-center justify-between gap-1">
             <Badge
               variant="outline"
               className={`gap-1 text-xs ${sentimentConfig.color}`}
@@ -94,24 +104,49 @@ export const FeedbackCard = ({
               <Icon className="h-3 w-3" />
               {sentimentConfig.label}
             </Badge>
-          </div>
-        </div>
-
-        {/* Feedback content */}
-        <div className="p-4 pb-0 space-y-4">
-          <div className="bg-muted/30 rounded-lg p-4 border border-border/50">
-            <ExpandableText content={content} />
-          </div>
-
-          <div className="flex justify-between items-center">
             <div className="flex items-center gap-1 font-semibold text-xs text-muted-foreground">
               <Calendar className="h-3 w-3" />
               <span title={absoluteTime}>{relativeTime}</span>
             </div>
+          </div>
+        </div>
+
+        {/* Feedback content */}
+        <div className="p-4 pb-0">
+          <div className="bg-muted/30 rounded-lg p-4 border border-border/50 mb-4 italic">
+            <ExpandableText content={content} />
+          </div>
+
+          <div className="flex justify-between items-center">
             <div className="">
               <Badge variant="secondary" className="text-xs">
                 {category}
               </Badge>
+            </div>
+
+            <div className="flex justify-end gap-1 sm:gap-2 border-border/50">
+              <Button
+                variant="outline"
+                size="sm"
+                className="flex items-center gap-1 text-xs"
+              >
+                <FilePlus className="h-4 w-4" />
+                Create Task
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowSimilar(!showSimilar)}
+                className="flex items-center gap-1 text-xs"
+              >
+                <Search className="h-4 w-4" />
+                {showSimilar ? "Hide Similar" : "View Similar"}
+                {showSimilar ? (
+                  <ChevronUp className="h-3 w-3" />
+                ) : (
+                  <ChevronDown className="h-3 w-3" />
+                )}
+              </Button>
             </div>
           </div>
         </div>
