@@ -44,7 +44,7 @@ export function ExpandableText({
           variant="ghost"
           size="sm"
           onClick={() => setIsExpanded(!isExpanded)}
-          className="mt-2 p-0 h-auto text-primary hover:text-primary-glow font-medium text-xs"
+          className="p-0 h-auto text-primary hover:text-primary-glow font-medium text-xs"
         >
           {isExpanded ? "Show less" : "Show more"}
         </Button>

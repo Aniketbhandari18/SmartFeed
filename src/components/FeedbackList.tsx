@@ -94,6 +94,7 @@ export default function FeedbackList({ spaceId }: props) {
             ref={index == feedbacks.length - 1 ? lastElementRef : undefined}
           >
             <FeedbackCard
+              spaceId={spaceId}
               id={feedback.id}
               content={feedback.content}
               sentiment={feedback.sentiment}

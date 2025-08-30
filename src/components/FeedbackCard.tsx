@@ -19,8 +19,10 @@ import { Button } from "@/components/ui/button";
 import { getNameInitials } from "@/utils/getNameInitials";
 import { ExpandableText } from "./ExpandableText";
 import { format, formatDistanceToNow } from "date-fns";
+import SimilarFeedbackList from "./SimilarFeedbackList";
 
 interface FeedbackCardProps {
+  spaceId: string
   id: string;
   content: string;
   sentiment: "positive" | "negative" | "neutral";
@@ -31,6 +33,7 @@ interface FeedbackCardProps {
 }
 
 export const FeedbackCard = ({
+  spaceId,
   id,
   content,
   sentiment,
@@ -149,6 +152,9 @@ export const FeedbackCard = ({
               </Button>
             </div>
           </div>
+
+          {/* Similar Feedbacks Section */}
+          {showSimilar && <SimilarFeedbackList spaceId={spaceId} feedbackId={id} />}
         </div>
       </CardContent>
     </Card>
