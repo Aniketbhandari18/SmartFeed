@@ -58,6 +58,18 @@ model Feedback {
   space Space @relation(fields: [spaceId], references: [id])
 }
 
+model Task {
+  id          String       @id @default(cuid())
+  spaceId     String
+  title       String
+  description String
+  priority    Priority
+  category    TaskCategory
+  completed   Boolean
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
 enum Category {
   praise
   complaint
@@ -72,4 +84,19 @@ enum Sentiment {
   positive
   negative
   neutral
+}
+
+enum Priority {
+  high
+  medium
+  low
+}
+
+enum TaskCategory {
+  bug_fix
+  feature
+  UI
+  performance
+  enhancement
+  other
 }
