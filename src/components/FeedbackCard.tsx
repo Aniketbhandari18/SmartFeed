@@ -99,7 +99,7 @@ export const FeedbackCard = ({
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-between gap-1">
+          <div className="flex flex-col items-end justify-between gap-1">
             <Badge
               variant="outline"
               className={`gap-1 text-xs ${sentimentConfig.color}`}
