@@ -1,5 +1,6 @@
 import ChatAssistant from "./ChatAssistant";
 import FeedbackList from "./FeedbackList";
+import TaskList from "./TaskList";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 
 export default function SpaceContent({ spaceId }: { spaceId: string }) {
@@ -9,7 +10,7 @@ export default function SpaceContent({ spaceId }: { spaceId: string }) {
         <TabsTrigger value="feedback">Feedbacks</TabsTrigger>
         <TabsTrigger value="analytics">Analytics</TabsTrigger>
         <TabsTrigger value="chatbot">AI Assistant</TabsTrigger>
-        <TabsTrigger value="actions">Action Items</TabsTrigger>
+        <TabsTrigger value="tasks">Tasks</TabsTrigger>
       </TabsList>
 
       <TabsContent value="feedback">
@@ -18,6 +19,10 @@ export default function SpaceContent({ spaceId }: { spaceId: string }) {
 
       <TabsContent value="chatbot">
         <ChatAssistant spaceId={spaceId} />
+      </TabsContent>
+
+      <TabsContent value="tasks">
+        <TaskList spaceId={spaceId} />
       </TabsContent>
     </Tabs>
   );
