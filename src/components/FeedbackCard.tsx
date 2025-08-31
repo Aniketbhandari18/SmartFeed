@@ -20,6 +20,8 @@ import { getNameInitials } from "@/utils/getNameInitials";
 import { ExpandableText } from "./ExpandableText";
 import { format, formatDistanceToNow } from "date-fns";
 import SimilarFeedbackList from "./SimilarFeedbackList";
+import TaskForm from "./TaskForm";
+import { addTask } from "@/actions/taskActions/addTask";
 
 interface FeedbackCardProps {
   spaceId: string
@@ -128,14 +130,16 @@ export const FeedbackCard = ({
             </div>
 
             <div className="flex justify-end gap-1 sm:gap-2 border-border/50">
-              <Button
-                variant="outline"
-                size="sm"
-                className="flex items-center gap-1 text-xs"
-              >
-                <FilePlus className="h-4 w-4" />
-                Create Task
-              </Button>
+              <TaskForm spaceId={spaceId} onSubmit={addTask}>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="flex items-center gap-1 text-xs"
+                >
+                  <FilePlus className="h-4 w-4" />
+                  Create Task
+                </Button>
+              </TaskForm>
               <Button
                 variant="outline"
                 size="sm"
