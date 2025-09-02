@@ -159,7 +159,7 @@ export default function TaskForm({
             />
 
             {/* Priority */}
-            <div className="flex justify-between">
+            <div className="flex justify-between flex-col sm:flex-row sm:gap-0 gap-5">
               <FormField
                 control={form.control}
                 name="priority"
