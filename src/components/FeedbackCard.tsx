@@ -130,7 +130,7 @@ export const FeedbackCard = ({
             </div>
 
             <div className="flex justify-end gap-1 sm:gap-2 border-border/50">
-              <TaskForm spaceId={spaceId} onSubmit={addTask}>
+              <TaskForm spaceId={spaceId} onSubmit={addTask} feedback={content}>
                 <Button
                   variant="outline"
                   size="sm"

@@ -29,7 +29,7 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 import { Button } from "./ui/button";
-import { Loader2, Plus } from "lucide-react";
+import { Loader2, Plus, Sparkles } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -40,10 +40,12 @@ import {
   SelectValue,
 } from "./ui/select";
 import toast from "react-hot-toast";
+import { getTitleSuggestion } from "@/lib/server/titleSuggestion";
 
 type Props = {
   spaceId: string;
   defaultValues?: Task;
+  feedback?: string;
   children?: ReactNode;
   onSubmit: (
     spaceId: string,
@@ -53,12 +55,14 @@ type Props = {
 
 export default function TaskForm({
   spaceId,
+  feedback,
   defaultValues,
   children,
   onSubmit,
 }: Props) {
   const [open, setOpen] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
+  const [isSuggesting, setIsSuggesting] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof taskFormSchema>>({
     resolver: zodResolver(taskFormSchema),
@@ -87,6 +91,13 @@ export default function TaskForm({
   const onOpenChange = () => {
     form.reset();
     setOpen(!open);
+  };
+
+  const handleSuggestTitle = async (feedback: string) => {
+    setIsSuggesting(true);
+    const text = await getTitleSuggestion(feedback);
+    form.setValue("title", text);
+    setIsSuggesting(false);
   };
 
   return (
@@ -126,7 +137,28 @@ export default function TaskForm({
                 <FormItem>
                   <FormLabel>Title</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter task title" {...field} />
+                    <div className="relative w-full">
+                      <Input
+                        placeholder="Enter task title"
+                        className="pr-9"
+                        {...field}
+                      />
+                      {feedback && (
+                        <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center">
+                          {isSuggesting ? (
+                            <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                          ) : (
+                            <button
+                              onClick={() => handleSuggestTitle(feedback)}
+                              type="button"
+                              className="p-1  rounded-sm transition-all duration-150 hover:bg-gray-100 cursor-pointer"
+                            >
+                              <Sparkles size={16} color="gray" />
+                            </button>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </FormControl>
                   <FormDescription>
                     Short name that clearly describes this task.
