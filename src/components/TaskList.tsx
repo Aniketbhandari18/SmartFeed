@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -46,7 +47,7 @@ export default function TaskList({ spaceId }: { spaceId: string }) {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold">Action Items</h2>
+        <h2 className="text-xl font-semibold">Tasks</h2>
         <TaskForm spaceId={spaceId} onSubmit={addTask} onSuccess={addNewTask}>
           <Button className="gap-2">
             <Plus className="h-4 w-4" />
@@ -57,11 +58,26 @@ export default function TaskList({ spaceId }: { spaceId: string }) {
 
       <div className="flex sm:flex-row flex-col-reverse justify-between gap-4 lg:gap-6">
         {/* mixed version */}
-        <Card className="sm:flex-1/5 lg:flex-2">
+        <Card className="sm:flex-1/5 lg:flex-2 gap-2">
           <CardHeader>
             <CardTitle>All Tasks</CardTitle>
           </CardHeader>
           <CardContent>
+            {tasks.length === 0 && (
+              <div className="flex flex-col items-center">
+                <Image
+                  src={"/task-illustration.png"}
+                  alt="Task illustration"
+                  width={200}
+                  height={200}
+                  className="mb-2"
+                />
+                <p className="text-lg font-medium">No task found</p>
+                <p className="text-sm text-muted-foreground">
+                  There are no tasks to display
+                </p>
+              </div>
+            )}
             <div className="space-y-4">
               {tasks.map((task) => (
                 <TaskCard
