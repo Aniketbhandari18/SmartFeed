@@ -50,7 +50,8 @@ type Props = {
   onSubmit: (
     spaceId: string,
     values: z.infer<typeof taskFormSchema>
-  ) => Promise<{ success: boolean; message: string }>;
+  ) => Promise<{ success: boolean; message: string; newTask?: Task }>;
+  onSuccess: (newTask: Task) => void;
 };
 
 export default function TaskForm({
@@ -59,6 +60,7 @@ export default function TaskForm({
   defaultValues,
   children,
   onSubmit,
+  onSuccess,
 }: Props) {
   const [open, setOpen] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
@@ -79,6 +81,7 @@ export default function TaskForm({
       const res = await onSubmit(spaceId, values);
 
       if (res.success) {
+        onSuccess(res.newTask!);
         toast.success(res.message);
         form.reset();
         setOpen(false);

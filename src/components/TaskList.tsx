@@ -39,11 +39,15 @@ export default function TaskList({ spaceId }: { spaceId: string }) {
     return <Loader className="mt-10" />;
   }
 
+  const addNewTask = (newTask: Task) => {
+    setTasks((prevTasks) => [newTask, ...prevTasks]);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-xl font-semibold">Action Items</h2>
-        <TaskForm spaceId={spaceId} onSubmit={addTask}>
+        <TaskForm spaceId={spaceId} onSubmit={addTask} onSuccess={addNewTask}>
           <Button className="gap-2">
             <Plus className="h-4 w-4" />
             Add task

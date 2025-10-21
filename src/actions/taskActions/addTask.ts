@@ -19,7 +19,7 @@ export async function addTask(
       throw new Error(validation.error.issues[0].message);
     }
 
-    await prisma.task.create({
+    const newTask = await prisma.task.create({
       data: {
         spaceId: spaceId,
         completed: false,
@@ -30,6 +30,7 @@ export async function addTask(
     return {
       success: true,
       message: "Task added successfully",
+      newTask: newTask,
     };
   } catch (error) {
     console.log(error);
