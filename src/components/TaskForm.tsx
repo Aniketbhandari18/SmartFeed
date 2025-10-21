@@ -51,7 +51,7 @@ type Props = {
     spaceId: string,
     values: z.infer<typeof taskFormSchema>
   ) => Promise<{ success: boolean; message: string; newTask?: Task }>;
-  onSuccess: (newTask: Task) => void;
+  onSuccess?: (newTask: Task) => void;
 };
 
 export default function TaskForm({
@@ -81,7 +81,7 @@ export default function TaskForm({
       const res = await onSubmit(spaceId, values);
 
       if (res.success) {
-        onSuccess(res.newTask!);
+        onSuccess?.(res.newTask!);
         toast.success(res.message);
         form.reset();
         setOpen(false);
