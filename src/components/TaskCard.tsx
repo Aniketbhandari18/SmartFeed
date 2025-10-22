@@ -12,6 +12,7 @@ import { Checkbox } from "./ui/checkbox";
 import { Badge } from "./ui/badge";
 import { toggleTaskCompleted } from "@/actions/taskActions/toggleTaskCompleted";
 import toast from "react-hot-toast";
+import { deleteTask } from "@/actions/taskActions/deleteTask";
 
 export default function TaskCard({
   spaceId,
@@ -68,6 +69,23 @@ export default function TaskCard({
     });
   };
 
+  const handleDelete = async () => {
+    let tasks: Task[] = [];
+
+    setTasks((prevTasks) => {
+      tasks = prevTasks;
+
+      return prevTasks.filter((t) => t.id !== task.id);
+    });
+
+    const res = await deleteTask(task.id);
+
+    if (!res.success) {
+      setTasks(tasks);
+      toast.error(res.message);
+    }
+  };
+
   return (
     <div
       className={`flex items-center gap-3 p-3 border rounded-lg ${
@@ -115,7 +133,10 @@ export default function TaskCard({
         <button className="p-1 rounded-md hover:bg-muted">
           <Edit3 size={16} />
         </button>
-        <button className="p-1 rounded-md hover:bg-muted text-red-600">
+        <button
+          onClick={handleDelete}
+          className="p-1 rounded-md hover:bg-muted text-red-600"
+        >
           <Trash2 size={16} />
         </button>
       </div>
