@@ -10,8 +10,7 @@ import toast from "react-hot-toast";
 import { Task } from "@prisma/client";
 import Loader from "./Loader";
 import TaskCard from "./TaskCard";
-import TaskForm from "./TaskForm";
-import { addTask } from "@/actions/taskActions/addTask";
+import CreateTaskForm from "./createTaskForm";
 
 export default function TaskList({ spaceId }: { spaceId: string }) {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -48,12 +47,12 @@ export default function TaskList({ spaceId }: { spaceId: string }) {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-xl font-semibold">Tasks</h2>
-        <TaskForm spaceId={spaceId} onSubmit={addTask} onSuccess={addNewTask}>
+        <CreateTaskForm spaceId={spaceId} setTasks={setTasks}>
           <Button className="gap-2">
             <Plus className="h-4 w-4" />
             Add task
           </Button>
-        </TaskForm>
+        </CreateTaskForm>
       </div>
 
       <div className="flex sm:flex-row flex-col-reverse justify-between gap-4 lg:gap-6">

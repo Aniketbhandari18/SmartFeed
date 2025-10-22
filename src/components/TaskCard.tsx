@@ -13,6 +13,7 @@ import { Badge } from "./ui/badge";
 import { toggleTaskCompleted } from "@/actions/taskActions/toggleTaskCompleted";
 import toast from "react-hot-toast";
 import { deleteTask } from "@/actions/taskActions/deleteTask";
+import UpdateTaskForm from "./updateTaskForm";
 
 export default function TaskCard({
   spaceId,
@@ -130,9 +131,12 @@ export default function TaskCard({
 
       {/* Edit + Delete Icons */}
       <div className="flex items-center gap-2">
-        <button className="p-1 rounded-md hover:bg-muted">
-          <Edit3 size={16} />
-        </button>
+        <UpdateTaskForm task={task} setTasks={setTasks}>
+          <button className="p-1 rounded-md hover:bg-muted">
+            <Edit3 size={16} />
+          </button>
+        </UpdateTaskForm>
+
         <button
           onClick={handleDelete}
           className="p-1 rounded-md hover:bg-muted text-red-600"

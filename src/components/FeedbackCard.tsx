@@ -20,11 +20,10 @@ import { getNameInitials } from "@/utils/getNameInitials";
 import { ExpandableText } from "./ExpandableText";
 import { format, formatDistanceToNow } from "date-fns";
 import SimilarFeedbackList from "./SimilarFeedbackList";
-import TaskForm from "./TaskForm";
-import { addTask } from "@/actions/taskActions/addTask";
+import CreateTaskForm from "./createTaskForm";
 
 interface FeedbackCardProps {
-  spaceId: string
+  spaceId: string;
   id: string;
   content: string;
   sentiment: "positive" | "negative" | "neutral";
@@ -130,7 +129,7 @@ export const FeedbackCard = ({
             </div>
 
             <div className="flex justify-end gap-1 sm:gap-2 border-border/50">
-              <TaskForm spaceId={spaceId} onSubmit={addTask} feedback={content}>
+              <CreateTaskForm spaceId={spaceId} feedback={content}>
                 <Button
                   variant="outline"
                   size="sm"
@@ -139,7 +138,7 @@ export const FeedbackCard = ({
                   <FilePlus className="h-4 w-4" />
                   Create Task
                 </Button>
-              </TaskForm>
+              </CreateTaskForm>
               <Button
                 variant="outline"
                 size="sm"
@@ -158,7 +157,9 @@ export const FeedbackCard = ({
           </div>
 
           {/* Similar Feedbacks Section */}
-          {showSimilar && <SimilarFeedbackList spaceId={spaceId} feedbackId={id} />}
+          {showSimilar && (
+            <SimilarFeedbackList spaceId={spaceId} feedbackId={id} />
+          )}
         </div>
       </CardContent>
     </Card>
