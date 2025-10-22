@@ -58,10 +58,7 @@ export default function TaskList({ spaceId }: { spaceId: string }) {
 
       <div className="flex sm:flex-row flex-col-reverse justify-between gap-4 lg:gap-6">
         {/* mixed version */}
-        <Card className="sm:flex-1/5 lg:flex-2 gap-2">
-          <CardHeader>
-            <CardTitle>All Tasks</CardTitle>
-          </CardHeader>
+        <Card className="sm:flex-1/5 lg:flex-2 gap-2 justify-center">
           <CardContent>
             {tasks.length === 0 && (
               <div className="flex flex-col items-center">
@@ -70,7 +67,7 @@ export default function TaskList({ spaceId }: { spaceId: string }) {
                   alt="Task illustration"
                   width={200}
                   height={200}
-                  className="mb-2"
+                  className="mb-3"
                 />
                 <p className="text-lg font-medium">No task found</p>
                 <p className="text-sm text-muted-foreground">
