@@ -24,7 +24,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Space } from "@prisma/client";
 import { ExternalLink, Loader2 } from "lucide-react";
 import Link from "next/link";
-import { useTransition } from "react";
+import { Dispatch, SetStateAction, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import z from "zod";
@@ -32,9 +32,10 @@ import z from "zod";
 type props = {
   slug: string;
   space: Pick<Space, "title" | "description" | "externalLink">;
+  setSubmitted: Dispatch<SetStateAction<boolean>>;
 };
 
-export default function FeedbackForm({ slug, space }: props) {
+export default function FeedbackForm({ slug, space, setSubmitted }: props) {
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof feedbackFormSchema>>({
@@ -53,6 +54,7 @@ export default function FeedbackForm({ slug, space }: props) {
       if (result.success) {
         toast.success("Feedback added successfully");
         form.reset();
+        setSubmitted(true);
       } else {
         toast.error(result.message);
       }
